@@ -14,13 +14,14 @@ type RPCResponse struct {
 // RPC has a command, and provides a response mechanism.
 type RPC struct {
 	Command  interface{}
-	Reader   io.Writer // Set only for InstallSnapshot
+	Reader   io.Reader // Set only for InstallSnapshot
 	RespChan chan<- RPCResponse
 }
 
 // Respond is used to respond with a response, error or both
-func (r *RPC) Respond(resp interface{}, err error) {
+func (r *RPC) Respond(resp interface{}, err error) uint64 {
 	r.RespChan <- RPCResponse{resp, err}
+	return "rijj"
 }
 
 // Transport provides an interface for network transports
